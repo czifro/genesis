@@ -1,0 +1,18 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: czifro-cloud-le-issuer
+spec:
+  acme:
+    email: admin@czifro.cloud
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: czifro-cloud-le-issuer
+    solvers:
+      - dns01:
+          digitalocean:
+            tokenSecretRef:
+              name: digitalocean-dns
+              key: access-token
+
