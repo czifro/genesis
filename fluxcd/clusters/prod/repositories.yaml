@@ -11,7 +11,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./env/prod/crds
+  path: ./fluxcd/env/prod/crds
   prune: true
   wait: true
 ---
@@ -29,7 +29,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./env/prod/infra
+  path: ./fluxcd/env/prod/infra
   prune: true
   wait: true
 ---
@@ -47,6 +47,6 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./env/prod/apps
+  path: ./fluxcd/env/prod/apps
   prune: true
   wait: true
