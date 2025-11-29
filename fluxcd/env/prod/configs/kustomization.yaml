@@ -1,0 +1,53 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+components:
+  - ../../_components/cert-issuer
+  - ../../_components/certificate
+  - ../../_components/op-eso-integration
+
+patches:
+  - target:
+      version: v1
+      group: cert-manager.io
+      kind: Certificate
+      name: czifro-cloud-cert
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: infra-czifro-cloud-cert
+      - op: replace
+        path: /spec/secretName
+        value: infra-czifro-cloud-cert
+      - op: replace
+        path: /spec/dnsNames
+        value:
+          - traefik.czifro.cloud
+  - target:
+      version: v1
+      group: cert-manager.io
+      kind: Issuer
+      name: czifro-cloud-le-issuer
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: infra-czifro-cloud-le-issuer
+      - op: replace
+        path: /spec/secretName
+        value: infra-czifro-cloud-le-issuer
+  - target:
+      version: v1
+      group: external-secrets.io
+      kind: SecretStore
+      name: 1password-sdk-backend
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: infra-1password-sdk-backend
+      - op: replace
+        path: /spec/secretName
+        value: infra-1password-sdk-backend
+      - op: replace
+        path: /spec/provider/onepasswordSDK/vault
+        value: czifro-cloud-prod
+
