@@ -45,35 +45,10 @@ spec:
         matchRule: Host(`traefik.czifro.cloud`)
         entryPoints:
           - websecure
-        middlewares:
-          - name: dashboard-auth
+        middlewares: []
 
     # Creates a BasiAuth Middleware and Secret for the Dashboard Security
-    extraObjects:
-      - apiVersion: external-secrets.io/v1
-        kind: ExternalSecret
-        metadata:
-          name: dashboard-auth-secret
-        spec:
-          secretStoreRef:
-            kind: ClusterSecretStore
-            name: onepassword
-          target:
-            creationPolicy: Owner
-          data:
-            - secretKey: username
-              remoteRef:
-                key: czifro-cloud-prod/traefik-dashboard-basicauth/username
-            - secretKey: password
-              remoteRef:
-                key: czifro-cloud-prod/traefik-dashboard-basicauth/credential
-      - apiVersion: traefik.io/v1alpha1
-        kind: Middleware
-        metadata:
-          name: dashboard-auth
-        spec:
-          basicAuth:
-            secret: dashboard-auth-secret
+    extraObjects: []
 
     # We will route with Gateway API instead.
     ingressClass:

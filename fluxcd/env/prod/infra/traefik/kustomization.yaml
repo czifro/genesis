@@ -17,3 +17,34 @@ patches:
           - kind: Secret
             name: infra-czifro-cloud-cert
             group: ""
+      - op: add
+        path: /spec/values/ingressRoute/dashboard/middlewares/-
+        value:
+          name: dashboard-auth
+      - op: replace
+        path: /spec/extraObjects
+        value:
+          - apiVersion: external-secrets.io/v1
+            kind: ExternalSecret
+            metadata:
+              name: dashboard-auth-secret
+            spec:
+              secretStoreRef:
+                kind: SecretStore
+                name: infra-1password-sdk-backend
+              target:
+                creationPolicy: Owner
+              data:
+                - secretKey: username
+                  remoteRef:
+                    key: czifro-cloud-prod/traefik-dashboard-basicauth/username
+                - secretKey: password
+                  remoteRef:
+                    key: czifro-cloud-prod/traefik-dashboard-basicauth/credential
+          - apiVersion: traefik.io/v1alpha1
+            kind: Middleware
+            metadata:
+              name: dashboard-auth
+            spec:
+              basicAuth:
+                secret: dashboard-auth-secret
