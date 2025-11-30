@@ -24,6 +24,9 @@ patches:
         path: /spec/values/ingressRoute/dashboard/middlewares/-
         value:
           name: dashboard-auth
+      - op: replace
+        path: /spec/extraObjects
+        value:
           - apiVersion: traefik.io/v1alpha1
             kind: Middleware
             metadata:
