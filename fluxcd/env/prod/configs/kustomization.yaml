@@ -23,10 +23,12 @@ patches:
       - op: replace
         path: /spec/issuerRef/name
         value: infra-czifro-cloud-le-issuer
+      - op: add
+        path: /spec/dnsNames/-
+        value: traefik.czifro.cloud
       - op: replace
-        path: /spec/dnsNames
-        value:
-          - traefik.czifro.cloud
+        path: /spec/commonName
+        value: traefik.czifro.cloud
   - target:
       version: v1
       group: cert-manager.io

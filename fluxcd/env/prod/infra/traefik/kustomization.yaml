@@ -3,3 +3,17 @@ kind: Component
 
 components:
   - ../../../base/apps/traefik
+
+patches:
+  - target:
+      group: helm.toolkit.fluxcd.io
+      version: v2
+      kind: HelmRelease
+      name: traefik
+    patch: |
+      - op: replace
+        path: /spec/values/gateway/listeners/websecure/certificateRefs
+        value:
+          - kind: Secret
+            name: infra-czifro-cloud-cert
+            group: ""

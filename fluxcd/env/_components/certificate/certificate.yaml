@@ -17,10 +17,9 @@ spec:
   subject:
     organizations:
       - czifro-cloud
-  commonName: cert.czifro.cloud
-  # MUST OVERRIDE
+  commonName: czifro.cloud
   dnsNames:
-    - example.czifro.cloud
+    - czifro.cloud
   issuerRef:
     name: czifro-cloud-le-issuer
     kind: Issuer

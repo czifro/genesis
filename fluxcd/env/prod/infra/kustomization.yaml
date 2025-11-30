@@ -5,4 +5,4 @@ namespace: default
 components:
   - external-secrets-operator
   - cert-manager
-  - traefik
+  # - traefik
