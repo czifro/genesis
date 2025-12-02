@@ -23,7 +23,7 @@ spec:
       # Defines the HTTP entry point named 'web'
       web:
         port: 8000
-        nodePort: 30000
+        targetPort: 8000
         # Instructs this entry point to redirect all traffic to the 'websecure' entry point
         redirections:
           entryPoint:
@@ -34,7 +34,7 @@ spec:
       # Defines the HTTPS entry point named 'websecure'
       websecure:
         port: 8443
-        nodePort: 30001
+        targetPort: 8443
 
     # Enables the dashboard in Secure Mode
     api:
